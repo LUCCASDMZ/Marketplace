@@ -18,7 +18,7 @@ class UsersSeeder extends Seeder
             'firstName' =>'Luccas',
             'lastName' => 'Duarte',
             'email' => 'lucasduarte2317@gmail.com',
-            'password' => Hash::make('1234'),
+            'password' => bcsqrt('1234'),
         ]);
     }
 }
