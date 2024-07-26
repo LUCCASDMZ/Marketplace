@@ -35,3 +35,6 @@ Route::get('/register', [loginController::class, 'create'])->name('login.create'
 
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
+Route::get('/admin/produtos', function(){
+    return view('admin.produtos');
+})->name('admin.produtos');

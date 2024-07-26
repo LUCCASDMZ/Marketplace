@@ -24,9 +24,9 @@
 
     <nav>
         <div class="red container">
-          <a href="#" class="brand-logo center">Curso Laravel</a>
+          <a href="#" class="brand-logo center">LuccasCommerce</a>
           <ul id="nav-mobile" class="left">
-            <li><a href="{{route('site.index')}}">home</a></li>
+            <li><a href="{{route('site.index')}}">Home</a></li>
             <li><a href="" class="dropdown-trigger" data-target='dropdown1'><i class="material-icons right">expand_more</i> Categorias</a></li>
             <li><a href="{{route('site.carrinho')}}">Carrinho <span class="new badge red" data-badge-caption=""> {{Cart::content()->count()}}</span></a></li>
           </ul>
