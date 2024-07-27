@@ -4,52 +4,19 @@
     
 
 <div class="fixed-action-btn">
-    <a  class="btn-floating btn-large bg-gradient-green modal-trigger" href="#modal1">
+    <a  class="btn-floating btn-large bg-gradient-green modal-trigger" href="#create">
       <i class="large material-icons">add</i>
     </a>   
-  </div>
-
-   <!-- Modal Structure -->
-   <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4><i class="material-icons">card_giftcard</i> Novo produto</h4>
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
-          </div>
-
-          <div class="input-field col s12">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-            <label>Materialize Select</label>
-          </div>          
-
-        </div> 
-       
-        <a href="#!" class="modal-close waves-effect waves-green btn blue right">Cadastrar</a><br>
-    </div>
-    
-  </form>
-  </div>
+  </div>   
   
-    
-   
 
     <div class="row container crud">
+
+      @include('admin.includes.mensagens')
         
             <div class="row titulo ">              
               <h1 class="left">Produtos</h1>
-              <span class="right chip">234 produtos cadastrados</span>  
+              <span class="right chip">{{$produtos->count()}} exibidos nesta pagina</span>  
             </div>
 
            <nav class="bg-gradient-blue">
@@ -65,6 +32,7 @@
           </nav>     
 
             <div class="card z-depth-4 registros" >
+              @include('admin.produtos.create')
             <table class="striped ">
                 <thead>
                   <tr>
@@ -79,55 +47,33 @@
                 </thead>
         
                 <tbody>
+
+                  @foreach ($produtos as $produto)
+                      
+                  
                   <tr>
-                    <td><img src="img/mouse.jpg" class="circle "></td>
-                    <td>#123</td>
-                    <td>Mouse USB</td>                    
-                    <td>R$ 7.00</td>
-                    <td>Eletrônicos</td>
+                    <td><img src="{{ url("storage/{$produto->imagem}") }}" class="circle "></td>
+                    <td>#{{$produto->id}}</td>
+                    <td>{{$produto->nome}}</td>                    
+                    <td>{{$produto->preco}}</td>
+                    <td>{{$produto->categoria->nome}}</td>
                     <td><a class="btn-floating  waves-effect waves-light orange"><i class="material-icons">mode_edit</i></a>
-                      <a class="btn-floating  waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
-                  </tr>
-                  <tr>
-                    <td><img src="img/mouse.jpg" class="circle"></td>
-                    <td>#123</td>
-                    <td>Mouse USB</td>                    
-                    <td>R$ 7.00</td>
-                    <td>Eletrônicos</td>
-                    <td><a class="btn-floating  waves-effect waves-light orange"><i class="material-icons">mode_edit</i></a>
-                      <a class="btn-floating  waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
-                  </tr>
-                  <tr>
-                    <td><img src="img/mouse.jpg" class="circle"></td>
-                    <td>#123</td>
-                    <td>Mouse USB</td>                    
-                    <td>R$ 7.00</td>
-                    <td>Eletrônicos</td>
-                    <td><a class="btn-floating  waves-effect waves-light orange"><i class="material-icons">mode_edit</i></a>
-                      <a class="btn-floating  waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
-                  </tr>
-                  <tr>
-                    <td><img src="img/mouse.jpg" class="circle"></td>
-                    <td>#123</td>
-                    <td>Mouse USB</td>                    
-                    <td>R$ 7.00</td>
-                    <td>Eletrônicos</td>
-                    <td><a class="btn-floating  waves-effect waves-light orange"><i class="material-icons">mode_edit</i></a>
-                      <a class="btn-floating  waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
-                  </tr>
+                  
+                  
+                      <a href="#delete-{{$produto->id}}" class="btn-floating modal-trigger  waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+                      @include('admin.produtos.delete')
+                  
+                    </tr>
+
+                  @endforeach
+
                 </tbody>
               </table>
             </div> 
 
-            <ul class="pagination center">
-              <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-              <li class="active"><a href="#!">1</a></li>
-              <li class="waves-effect"><a href="#!">2</a></li>
-              <li class="waves-effect"><a href="#!">3</a></li>
-              <li class="waves-effect"><a href="#!">4</a></li>
-              <li class="waves-effect"><a href="#!">5</a></li>
-              <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            </ul>               
+            <div class="row center">
+              {{$produtos->links('custom/pagination')}}
+          </div>             
     </div>
        
 @endsection
